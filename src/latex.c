@@ -416,12 +416,28 @@ static int S_render_node(cmark_renderer *renderer, cmark_node *node,
     break;
 
   case CMARK_NODE_IMAGE:
-    if (entering) {
-      LIT("\\protect\\includegraphics{");
-      // requires \include{graphicx}
-      OUT(cmark_node_get_url(node), false, URL);
-      LIT("}");
-      return 0;
+    if (options & CMARK_OPT_FIGURES) {
+      if (entering) {
+        LIT("\\begin{figure}[h]\n\t\\protect\\includegraphics{");
+        // requires \include{graphicx}
+        OUT(cmark_node_get_url(node), false, URL);
+        LIT("}\n\t\\caption[");
+      }
+      else {
+        LIT("]{");
+        OUT(cmark_node_get_title(node), false, NORMAL);
+        LIT("}\n\\end{figure}");
+        return 0;
+      }
+    }
+    else {
+      if (entering) {
+        LIT("\\protect\\includegraphics{");
+        // requires \include{graphicx}
+        OUT(cmark_node_get_url(node), false, URL);
+        LIT("}");
+        return 0;
+      }
     }
     break;
 

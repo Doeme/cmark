@@ -576,6 +576,12 @@ char *cmark_render_latex(cmark_node *root, int options, int width);
  */
 #define CMARK_OPT_SMART (1 << 10)
 
+/** Don't just include an \includegraphics, but wrap it into a figure
+ * with the alternative text as table-of-content-caption and the title as
+ * displayed caption
+ */
+#define CMARK_OPT_FIGURES (1 << 11)
+
 /**
  * ## Version information
  */

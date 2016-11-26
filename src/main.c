@@ -31,6 +31,7 @@ void print_usage() {
   printf("  --hardbreaks     Treat newlines as hard line breaks\n");
   printf("  --nobreaks       Render soft line breaks as spaces\n");
   printf("  --safe           Suppress raw HTML and dangerous URLs\n");
+  printf("  --figures        Write images into figures when in latex mode\n");
   printf("  --smart          Use smart punctuation\n");
   printf("  --normalize      Consolidate adjacent text nodes\n");
   printf("  --help, -h       Print usage information\n");
@@ -99,6 +100,8 @@ int main(int argc, char *argv[]) {
       options |= CMARK_OPT_SMART;
     } else if (strcmp(argv[i], "--safe") == 0) {
       options |= CMARK_OPT_SAFE;
+    } else if (strcmp(argv[i], "--figures") == 0) {
+      options |= CMARK_OPT_FIGURES;
     } else if (strcmp(argv[i], "--normalize") == 0) {
       options |= CMARK_OPT_NORMALIZE;
     } else if (strcmp(argv[i], "--validate-utf8") == 0) {
