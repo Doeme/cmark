@@ -418,15 +418,15 @@ static int S_render_node(cmark_renderer *renderer, cmark_node *node,
   case CMARK_NODE_IMAGE:
     if (options & CMARK_OPT_FIGURES) {
       if (entering) {
-        LIT("\\begin{figure}[h]\n\t\\protect\\includegraphics{");
+        LIT("\\commonmarkimage{");
         // requires \include{graphicx}
         OUT(cmark_node_get_url(node), false, URL);
-        LIT("}\n\t\\caption[");
+        LIT("}{");
       }
       else {
-        LIT("]{");
+        LIT("}{");
         OUT(cmark_node_get_title(node), false, NORMAL);
-        LIT("}\n\\end{figure}");
+        LIT("}");
         return 0;
       }
     }
